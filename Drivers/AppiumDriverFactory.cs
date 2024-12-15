@@ -1,22 +1,23 @@
 ﻿using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;
+using OpenQA.Selenium.Remote;
 
 namespace TestUAT.Drivers
 {
     public static class AppiumDriverFactory
     {
-        public static AppiumDriver CreateDriver(string platform)
+        public static AppiumDriver CreateDriver(string platform, string deviceName, string port)
         {
             var options = new AppiumOptions();
 
             if (platform == "android")
             {
                 options.PlatformName = "Android";
-                options.DeviceName = "23010522512714";
-                options.App = "C:\\Users\\Mitchell.Plass\\OneDrive - WiseTech Global Pty Ltd\\Desktop\\Mobility\\AppiumTest.apk";
+                options.App = "C:\\git\\wtg\\Glow\\Glow\\Mobility\\Android\\GlowClient\\app\\build\\outputs\\apk\\debug\\app-debug.apk";
                 options.AutomationName = "UiAutomator2";
-                return new AndroidDriver(new Uri("http://10.61.209.35:4723"), options);
+                options.AddAdditionalAppiumOption("udid", deviceName);
+                return new AndroidDriver(new Uri($"http://10.2.10.204:{port}"), options);
             }
             else if (platform == "ios")
             {
