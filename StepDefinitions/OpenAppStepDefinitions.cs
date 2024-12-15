@@ -11,13 +11,15 @@ namespace TestUAT.StepDefinitions
         [Given(@"the app is launched")]
         public void GivenTheAppIsLaunched()
         {
-            Assert.IsNotNull(Hooks.Hooks.Driver, "Appium Driver was not initialized");
+            Assert.IsNotNull(Hooks.Hooks.Driver1, "Appium Driver was not initialized");
+            Assert.IsNotNull(Hooks.Hooks.Driver2, "Appium Driver was not initialized");
         }
 
         [Then(@"the app should be open")]
         public void ThenTheAppShouldBeOpen()
         {
-            Assert.IsNotNull(Hooks.Hooks.Driver.Context, "The app did not open correctly");
+            Assert.IsNotNull(Hooks.Hooks.Driver1.Context, "The app did not open correctly");
+            Assert.IsNotNull(Hooks.Hooks.Driver2.Context, "The app did not open correctly");
         }
     }
 }
