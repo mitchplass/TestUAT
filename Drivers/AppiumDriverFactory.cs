@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Appium.Android;
 using OpenQA.Selenium.Appium.iOS;
 using OpenQA.Selenium.Remote;
@@ -17,7 +18,12 @@ namespace TestUAT.Drivers
                 options.App = "C:\\git\\wtg\\Glow\\Glow\\Mobility\\Android\\GlowClient\\app\\build\\outputs\\apk\\debug\\app-debug.apk";
                 options.AutomationName = "UiAutomator2";
                 options.AddAdditionalAppiumOption("udid", deviceName);
-                return new AndroidDriver(new Uri($"http://10.2.10.204:{port}"), options);
+                options.AddAdditionalAppiumOption("optionalIntentArguments", "-e settings \"{&quot;url&quot;:&quot;https://www-hyetip.cargowise.com/Portals/WRF&quot;,&quot;selectedWarehouseRF&quot;:&quot;true&quot;,&quot;selectedProductWarehouse&quot;:&quot;true&quot;,&quot;selectedTransitWarehouse&quot;:&quot;true&quot;,&quot;selectedPortTransport&quot;:&quot;true&quot;,&quot;enableMultipleAppFeature&quot;:&quot;true&quot;,&quot;mobileServiceUri&quot;:&quot;https://www-hyetip.cargowise.com/Portals/WRF&quot;}\"");
+                options.AddAdditionalAppiumOption("appPackage", "com.wisetechglobal.glowclient");
+                options.AddAdditionalAppiumOption("appActivity", "com.wisetechglobal.glowclient.FullscreenWebActivity");
+                options.AddAdditionalAppiumOption("appWaitActivity", "com.wisetechglobal.glowclient.activities.SplashScreenActivity,com.wisetechglobal.glowclient.FullscreenWebActivity,com.wisetechglobal.activities.MainActivity");
+                options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
+                return new AndroidDriver(new Uri($"http://127.0.0.1:{port}"), options);
             }
             else if (platform == "ios")
             {
