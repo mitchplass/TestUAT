@@ -1,0 +1,10 @@
+﻿{
+  "specFlow": {
+    "runtime": {
+      "parallelExecution": {
+        "multiThreaded": true,
+        "perScenario": true
+      }
+    }
+  }
+}
