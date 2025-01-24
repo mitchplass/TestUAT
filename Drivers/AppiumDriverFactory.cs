@@ -21,7 +21,8 @@ namespace TestUAT.Drivers
                 options.AddAdditionalAppiumOption("optionalIntentArguments", "-e settings \"{&quot;url&quot;:&quot;https://www-hyetip.cargowise.com/Portals/WRF&quot;,&quot;selectedWarehouseRF&quot;:&quot;true&quot;,&quot;selectedProductWarehouse&quot;:&quot;true&quot;,&quot;selectedTransitWarehouse&quot;:&quot;true&quot;,&quot;selectedPortTransport&quot;:&quot;true&quot;,&quot;enableMultipleAppFeature&quot;:&quot;true&quot;,&quot;mobileServiceUri&quot;:&quot;https://www-hyetip.cargowise.com/Portals/WRF&quot;}\"");
                 options.AddAdditionalAppiumOption("appPackage", "com.wisetechglobal.glowclient");
                 options.AddAdditionalAppiumOption("appActivity", "com.wisetechglobal.glowclient.FullscreenWebActivity");
-                options.AddAdditionalAppiumOption("appWaitActivity", "com.wisetechglobal.glowclient.activities.SplashScreenActivity,com.wisetechglobal.glowclient.FullscreenWebActivity,com.wisetechglobal.activities.MainActivity");
+                options.AddAdditionalAppiumOption("chromedriverExecutable", @"C:\chromedriver_win32\chromedriver.exe");
+                //options.AddAdditionalAppiumOption("appWaitActivity", "com.wisetechglobal.glowclient.activities.SplashScreenActivity,com.wisetechglobal.glowclient.FullscreenWebActivity,com.wisetechglobal.activities.MainActivity");
                 options.AddAdditionalAppiumOption("appium:autoGrantPermissions", true);
                 return new AndroidDriver(new Uri($"http://127.0.0.1:{port}"), options);
             }
