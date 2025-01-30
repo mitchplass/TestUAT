@@ -13,6 +13,7 @@ namespace TestUAT.StepDefinitions
     [Binding]
     public class OpenAppStepDefinitions
     {
+        
         [Given(@"the app is launched")]
         public void GivenTheAppIsLaunched()
         {
@@ -22,9 +23,7 @@ namespace TestUAT.StepDefinitions
         [Given(@"I press port transport")]
         public void GivenIPressPortTransport()
         {
-            Thread.Sleep(10000);
-            var element = Hooks.Hooks.Driver1.FindElement(by: By.XPath("(//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.wisetechglobal.glowclient:id/appRecyclerView\"])[2]/androidx.cardview.widget.CardView/android.view.ViewGroup"));
-            element.Click();
+            NavigationHelper.ElementWaitAndClick(By.XPath("(//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.wisetechglobal.glowclient:id/appRecyclerView\"])[2]/androidx.cardview.widget.CardView/android.view.ViewGroup"));
         }
 
         [Given(@"I enter login details with username ""([^""]*)"" and password ""([^""]*)""")]
@@ -32,16 +31,25 @@ namespace TestUAT.StepDefinitions
         {
             Hooks.Hooks.Driver1.Context = "WEBVIEW_com.wisetechglobal.glowclient";
 
-            var wait = new WebDriverWait(Hooks.Hooks.Driver1, TimeSpan.FromSeconds(10));
-            var loginButton = wait.Until(driver => driver.FindElement(By.TagName("button")));
-            loginButton.Click();
+            NavigationHelper.ElementWaitAndClick(By.TagName("button"));
+            NavigationHelper.ElementWaitAndSendKeys(By.CssSelector("#i0116"), username);
+            NavigationHelper.ElementWaitAndClick(By.CssSelector("#idSIButton9"));
+            NavigationHelper.ElementWaitAndSendKeys(By.CssSelector("#i0118"), password);
+            NavigationHelper.ElementWaitAndClick(By.CssSelector("#idSIButton9"));
+        }
+
+        [Given(@"I select account ""([^""]*)""")]
+        public void GivenISelectCWSupport(string account)
+        {
+            Thread.Sleep(20000);
+            NavigationHelper.ElementWaitAndClick(By.XPath($"//*[text()='{account}']"));
         }
 
 
         [Then(@"the port transport portal should be open")]
         public void ThenThePortTransportPortalShouldBeOpen()
         {
-            Assert.IsTrue(true);
+            Assert.IsNotNull(NavigationHelper.WaitForElement(By.XPath("//*[text()='Port Transport Mobile']")));
         }
     }
 }
