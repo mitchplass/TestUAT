@@ -29,6 +29,11 @@ namespace TestUAT.StepDefinitions
         [Given(@"I enter login details with username ""([^""]*)"" and password ""([^""]*)""")]
         public void GivenIEnterLoginDetailsWithUsernameAndPassword(string username, string password)
         {
+            foreach (var context in Hooks.Hooks.Driver1.Contexts)
+            {
+                Console.WriteLine(context);
+            }
+
             Hooks.Hooks.Driver1.Context = "WEBVIEW_com.wisetechglobal.glowclient";
 
             NavigationHelper.ElementWaitAndClick(By.TagName("button"));

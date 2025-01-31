@@ -1,10 +1,11 @@
 ﻿{
   "specFlow": {
     "runtime": {
-      "parallelExecution": {
-        "multiThreaded": true,
-        "perScenario": true
-      }
+      "stopAfterFailures": 5,
+      "obfuscateLanguageFeature": true
+    },
+    "generator": {
+      "generateParallelCodeForFixtures": true
     }
   }
 }

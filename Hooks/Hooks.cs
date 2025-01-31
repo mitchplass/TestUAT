@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium.Appium;
 using OpenQA.Selenium.Support.UI;
 using TestUAT.Drivers;
 using TestUAT.Support;
@@ -16,11 +17,13 @@ namespace TestUAT.Hooks
         public void Setup()
         {
             string platform = "android";
-            Driver1 = AppiumDriverFactory.CreateDriver(platform, "emulator-5554", "1000");
+            string udid = TestContext.Parameters["udid"];
+            string port = TestContext.Parameters["port"];
+            Driver1 = AppiumDriverFactory.CreateDriver(platform, udid, port);
             Wait = new WebDriverWait(Driver1, TimeSpan.FromSeconds(20));
 
-            ADBHelper.RunADBCommand("shell appops set com.wisetechglobal.glowclient MANAGE_EXTERNAL_STORAGE allow");
-            ADBHelper.RunADBCommand("shell am start -n com.wisetechglobal.glowclient/.FullscreenWebActivity");
+            //ADBHelper.RunADBCommand($"-s {udid} shell appops set com.wisetechglobal.glowclient MANAGE_EXTERNAL_STORAGE allow");
+            ADBHelper.RunADBCommand($"-s {udid} shell am start -n com.wisetechglobal.glowclient/.FullscreenWebActivity");
 
         }
 
