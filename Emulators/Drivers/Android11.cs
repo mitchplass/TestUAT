@@ -8,9 +8,9 @@ using TestUAT.Support;
 
 namespace TestUAT.Emulators.Drivers
 {
-    public class Android10 : IEmulator
+    public class Android11 : IEmulator
     {
-        public readonly string Udid = "emulator-5554";
+        public readonly string Udid = "emulator-5556";
 
         public AndroidDriver Driver
         {
@@ -23,9 +23,9 @@ namespace TestUAT.Emulators.Drivers
             {
                 AppiumOptions options = new AppiumOptions();
                 options.SetDefaultAndroidOptions();
-                options.DeviceName = "Android 10 Emulator";
+                options.DeviceName = "Android 11 Emulator";
                 options.AddAdditionalAppiumOption("udid", Udid);
-                options.AddAdditionalAppiumOption("chromedriverExecutable", @"C:\chromedriverv74\chromedriver.exe");
+                options.AddAdditionalAppiumOption("chromedriverExecutable", @"C:\chromedriverv83\chromedriver.exe");
                 return options;
             }
         }
