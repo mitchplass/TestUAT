@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpenQA.Selenium.Appium;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,19 +11,22 @@ namespace TestUAT.Emulators.Helpers
 {
     public static class EmulatorFactory
     {
-        public static void StartDriver(EmulatorVersions version)
+        public static AppiumDriver StartDriver(EmulatorVersions version)
         {
+            AppiumDriver driver;
+
             switch (version)
             {
                 case EmulatorVersions.Android8:
-                    break;
+                    throw new NotImplementedException();
                 case EmulatorVersions.Android10:
-                    new Android10().StartDriver();
-                    break;
+                    driver = new Android10().StartDriver();
+                    return driver;
                 case EmulatorVersions.Android11:
-                    break;
+                    driver = new Android11().StartDriver();
+                    return driver;
                 default:
-                    break;
+                    throw new NotImplementedException();
             };
         }
     }

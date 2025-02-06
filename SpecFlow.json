@@ -1,11 +1,21 @@
 ﻿{
   "specFlow": {
+    "bindingCulture": {
+      "language": "en"
+    },
     "runtime": {
-      "stopAfterFailures": 5,
-      "obfuscateLanguageFeature": true
+      "stopAfterFailures": 3,
+      "missingOrPendingStepsOutcome": "Error"
     },
     "generator": {
-      "generateParallelCodeForFixtures": true
+      "allowDebugGeneratedFiles": false,
+      "path": "bin",
+      "unitTestProvider": "NUnit"
+    },
+    "execution": {
+      "testThreadCount": 2,
+      "retryCount": 0,
+      "stopAfterFailures": 3
     }
   }
 }

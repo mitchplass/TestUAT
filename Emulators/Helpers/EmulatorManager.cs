@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium.Appium.Android;
+﻿using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Android;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,44 +12,19 @@ namespace TestUAT.Emulators.Helpers
 {
     public static class EmulatorManager
     {
-        private static ThreadLocal<AndroidDriver> Driver = new ThreadLocal<AndroidDriver>();
-
-        public static AndroidDriver GetDriver()
-        {
-            return DriverStored;
-        }
-
-        private static AndroidDriver DriverStored 
-        { 
-            get
-            {
-                if (Driver == null || DriverStored == null)
-                {
-                    throw new ArgumentException("Call 'StartDriver' first");
-                }
-                return Driver.Value;
-            }
-            set
-            {
-                Driver.Value = value;
-            }
-        }
+        public static ThreadLocal<AppiumDriver> Driver = new ThreadLocal<AppiumDriver>();
 
         public static void StartDriver(EmulatorVersions version)
         {
-            EmulatorFactory.StartDriver(version);
+            var driver = EmulatorFactory.StartDriver(version) ?? throw new Exception("Failed to start driver");
+            Driver.Value = driver;
         }
 
         public static void CloseDriver()
         {
-            AndroidDriver driver = DriverStored;
+            var driver = Driver.Value;
             driver.Quit();
             driver.Dispose();
-
-            if (DriverStored != null)
-            {
-                DriverStored = null;
-            }
         }
     }
 }
