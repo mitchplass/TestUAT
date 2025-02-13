@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium.Appium;
+using OpenQA.Selenium.Appium.Service;
 using OpenQA.Selenium.Support.UI;
 using TestUAT.Emulators.Helpers;
 namespace TestUAT.Hooks
@@ -10,12 +11,13 @@ namespace TestUAT.Hooks
         public static ThreadLocal<WebDriverWait> Wait = new ThreadLocal<WebDriverWait>();
 
         [BeforeScenario]
-        public void Setup()
+        public static void Setup()
         {
             
         }
-        [AfterScenario]
-        public void TearDown()
+
+        [AfterFeature]
+        public static void TearDown()
         {
             EmulatorManager.CloseDriver();
         }

@@ -15,6 +15,12 @@ namespace TestUAT.StepDefinitions
             NavigationHelper.ElementWaitAndClick(By.XPath("(//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.wisetechglobal.glowclient:id/appRecyclerView\"])[2]/androidx.cardview.widget.CardView/android.view.ViewGroup"), Base.Wait.Value);
         }
 
+        [Given(@"I press transit warehouse")]
+        public void GivenIPressTransitWarehouse()
+        {
+            NavigationHelper.ElementWaitAndClick(By.XPath("(//androidx.recyclerview.widget.RecyclerView[@resource-id=\"com.wisetechglobal.glowclient:id/appRecyclerView\"])[1]/androidx.cardview.widget.CardView[3]/android.view.ViewGroup"), Base.Wait.Value);
+        }
+
         [Given(@"I enter login details with username ""([^""]*)"" and password ""([^""]*)""")]
         public void GivenIEnterLoginDetailsWithUsernameAndPassword(string username, string password)
         {
@@ -38,7 +44,17 @@ namespace TestUAT.StepDefinitions
         [Then(@"the port transport portal should be open")]
         public void ThenThePortTransportPortalShouldBeOpen()
         {
-            Assert.IsNotNull(NavigationHelper.WaitForElement(By.XPath("//*[text()='Port Transport Mobile']"), Base.Wait.Value));
+            Base.Driver.Value.Context = "WEBVIEW_com.wisetechglobal.glowclient";
+
+            Assert.IsNotNull(NavigationHelper.WaitForElement(By.XPath("//*[text()='Port Transport Mobility']"), Base.Wait.Value));
+        }
+
+        [Then(@"the transit warehouse portal should be open")]
+        public void ThenTheTransitWarehousePortalShouldBeOpen()
+        {
+            Base.Driver.Value.Context = "WEBVIEW_com.wisetechglobal.glowclient";
+
+            Assert.IsNotNull(NavigationHelper.WaitForElement(By.XPath("//*[text()='Transit Warehouse - Mobile']"), Base.Wait.Value));
         }
     }
 }

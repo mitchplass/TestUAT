@@ -17,7 +17,6 @@ namespace TestUAT.StepDefinitions
             if (Enum.TryParse(versionString, out EmulatorVersions version))
             {
                 EmulatorManager.StartDriver(version);
-                Base.Driver = EmulatorManager.Driver;
                 Base.Wait.Value = new WebDriverWait(Base.Driver.Value, TimeSpan.FromSeconds(20));
 
                 var uuid = Base.Driver.Value.Capabilities.GetCapability("udid").ToString();

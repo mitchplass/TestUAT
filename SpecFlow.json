@@ -5,7 +5,11 @@
     },
     "runtime": {
       "stopAfterFailures": 3,
-      "missingOrPendingStepsOutcome": "Error"
+      "missingOrPendingStepsOutcome": "Error",
+      "parallelExecution": {
+        "testThreadCount": 2,
+        "perFeatureInstance": true
+      }
     },
     "generator": {
       "allowDebugGeneratedFiles": false,
