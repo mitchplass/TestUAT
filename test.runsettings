@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RunSettings>
-  <!-- Parameters used by tests at runtime -->
-  <TestRunParameters>
-    <Parameter name="udid" value="emulator-5554" />
-    <Parameter name="port" value="1000" />
-  </TestRunParameters>
-</RunSettings>
