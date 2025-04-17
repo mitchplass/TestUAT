@@ -20,7 +20,7 @@ namespace TestUAT.StepDefinitions
                 Base.Wait.Value = new WebDriverWait(Base.Driver.Value, TimeSpan.FromSeconds(20));
 
                 var uuid = Base.Driver.Value.Capabilities.GetCapability("udid").ToString();
-                ADBHelper.RunADBCommand($"-s {uuid} shell am start -n com.wisetechglobal.glowclient/.FullscreenWebActivity");
+                CommandHelper.RunADBCommand($"-s {uuid} shell am start -n com.wisetechglobal.glowclient/.FullscreenWebActivity");
             }
             else
             {

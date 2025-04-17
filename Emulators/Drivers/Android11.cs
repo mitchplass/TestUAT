@@ -12,6 +12,7 @@ namespace TestUAT.Emulators.Drivers
     public class Android11 : IEmulator
     {
         public readonly string Udid = "emulator-5556";
+        public readonly string avdName = "Android11";
 
         public AndroidDriver Driver
         {
@@ -30,6 +31,7 @@ namespace TestUAT.Emulators.Drivers
                 return options;
             }
         }
+
         public AppiumLocalService Service
         {
             get
@@ -43,8 +45,19 @@ namespace TestUAT.Emulators.Drivers
             }
         }
 
+        public void StartEmulator()
+        {
+            var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts", "LaunchEmulators.ps1");
+            CommandHelper.RunLaunchEmulatorPowershellScript(path, avdName); 
+            Base.IsEmulatorRunning.Value = true;
+        }
+
         public AppiumDriver StartDriver()
         {
+            if (!Base.IsEmulatorRunning.Value)
+            {
+                StartEmulator();
+            }
             AndroidDriver driver = new AndroidDriver(Service.ServiceUrl, AppiumOptions);
             Driver = driver;
 

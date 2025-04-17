@@ -11,6 +11,7 @@ namespace TestUAT.Emulators.Interfaces
         AndroidDriver Driver { get; set; }
         AppiumOptions AppiumOptions { get; }
         AppiumLocalService Service { get; }
+        void StartEmulator();
         AppiumDriver StartDriver();
     }
 }
