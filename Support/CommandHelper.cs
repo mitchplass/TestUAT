@@ -45,25 +45,24 @@ namespace TestUAT.Support
             {
                 FileName = "powershell.exe",
                 Arguments = $"-ExecutionPolicy Bypass -File \"{scriptPath}\" -avdName \"{avdName}\"",
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
+                UseShellExecute = true,
+                CreateNoWindow = false
             };
 
             using (var process = Process.Start(psi))
             {
-                string output = process.StandardOutput.ReadToEnd();
-                string error = process.StandardError.ReadToEnd();
+                //string output = process.StandardOutput.ReadToEnd();
+                //string error = process.StandardError.ReadToEnd();
 
                 process.WaitForExit();
 
-                if (process.ExitCode != 0)
-                {
-                    throw new Exception($"PowerShell script failed with exit code {process.ExitCode}. Error: {error}");
-                }
+                //if (process.ExitCode != 0)
+                //{
+                //    throw new Exception($"PowerShell script failed with exit code {process.ExitCode}. Error: {error}");
+                //}
 
-                return output;
+                //return output;
+                return "";
             }
         }
 

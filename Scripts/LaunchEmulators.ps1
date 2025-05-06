@@ -12,6 +12,8 @@ if ($PSBoundParameters.ContainsKey('avdName')) {
 	exit 1
 }
 
+$port = if ($avdName -like "*Android10*") { 5554 } else { 5556 }
+
 # get correct system image
 if ($avdName -like "*Android10*") {
     $systemImage = "system-images;android-29;google_apis;x86"
@@ -24,6 +26,7 @@ else {
 }
 
 # check if avd exists
+& adb start-server
 Write-Host "Checking if AVD '$avdName' exists..."
 $avdList = & avdmanager list avd
 
@@ -37,12 +40,13 @@ if (-not ($avdList -match $avdName)) {
 
 # start emulator
 Write-Host "Starting emulator '$avdName'..."
-Start-Process "$env:ANDROID_HOME\emulator\emulator.exe" -ArgumentList "-avd $avdName"
+Start-Process "$env:ANDROID_HOME\emulator\emulator.exe" -ArgumentList "-avd $avdName", "-port $port", "-no-audio", "-no-snapshot"#, "-no-window", "-gpu off"
 
 # wait for ready
 Write-Host "Waiting for emulator to boot..."
-& adb wait-for-device
-while ((& adb shell getprop sys.boot_completed).Trim() -ne "1") {
+$serial = "emulator-$port"
+& adb -s $serial wait-for-device
+while ((& adb -s $serial shell getprop sys.boot_completed).Trim() -ne "1") {
     Start-Sleep -Seconds 1
     Write-Host "Still booting..."
 }

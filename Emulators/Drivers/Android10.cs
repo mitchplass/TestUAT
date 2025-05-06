@@ -11,8 +11,9 @@ namespace TestUAT.Emulators.Drivers
 {
     public class Android10 : IEmulator
     {
-        public readonly string Udid = "emulator-5554";
+        public string Udid = "";
         public readonly string avdName = "Android10";
+        private bool IsEmulatorRunning = false;
 
         public AndroidDriver Driver
         {
@@ -48,15 +49,16 @@ namespace TestUAT.Emulators.Drivers
         {
             var path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Scripts", "LaunchEmulators.ps1");
             CommandHelper.RunLaunchEmulatorPowershellScript(path, avdName);
-            Base.IsEmulatorRunning.Value = true;
+            IsEmulatorRunning = true;
         }
 
         public AppiumDriver StartDriver()
         {
-            if (!Base.IsEmulatorRunning.Value)
+            if (!IsEmulatorRunning)
             {
                 StartEmulator();
             }
+            Udid = SetupHelper.PopulateUDID(avdName);
             AndroidDriver driver = new AndroidDriver(Service.ServiceUrl, AppiumOptions);
             Driver = driver;
 

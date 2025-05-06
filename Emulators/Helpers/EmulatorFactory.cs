@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using TestUAT.Emulators.Drivers;
 using TestUAT.Emulators.Types;
+using Base = TestUAT.Hooks.Hooks;
 
 namespace TestUAT.Emulators.Helpers
 {
@@ -20,10 +21,10 @@ namespace TestUAT.Emulators.Helpers
                 case EmulatorVersions.Android8:
                     throw new NotImplementedException();
                 case EmulatorVersions.Android10:
-                    driver = new Android10().StartDriver();
+                    driver = Base.Android10.StartDriver();
                     return driver;
                 case EmulatorVersions.Android11:
-                    driver = new Android11().StartDriver();
+                    driver = Base.Android11.StartDriver();
                     return driver;
                 default:
                     throw new NotImplementedException();
